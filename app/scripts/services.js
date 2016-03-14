@@ -1,6 +1,7 @@
-'use strict';
+(function(){
+    'use strict';
 
-angular.module('confusionApp')
+    angular.module('confusionApp')
     .constant("baseURL", "http://localhost:3000/")
     .service('menuFactory', ['$http', 'baseURL', function($http, baseURL) {
 
@@ -75,6 +76,6 @@ angular.module('confusionApp')
 
         return corpfac;
 
-    })
+    });
 
-;
+})();

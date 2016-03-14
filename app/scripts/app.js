@@ -1,4 +1,5 @@
-'use strict';
+(function(){
+    'use strict';
 
 angular.module('confusionApp', ['ui.router'])
     .config(function($stateProvider, $urlRouterProvider) {
@@ -69,3 +70,5 @@ angular.module('confusionApp', ['ui.router'])
         $urlRouterProvider.otherwise('/');
     })
 ;
+
+})();

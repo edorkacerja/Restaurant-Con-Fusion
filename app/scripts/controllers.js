@@ -1,19 +1,24 @@
-'use strict';
+(function(){
+    'use strict';
 
-angular.module('confusionApp')
+    angular.module('confusionApp')
 
     .controller('MenuController', ['$scope', 'menuFactory', function($scope, menuFactory) {
 
         $scope.tab = 1;
         $scope.filtText = '';
         $scope.showDetails = false;
-
-        $scope.dishes= [];
+        $scope.showMenu = false;
+        $scope.message = "Loading ...";
+        $scope.dishes= {};
 
         menuFactory.getDishes()
             .then(function(response){
                 $scope.dishes = response.data;
-            });
+            }),
+            function(response) {
+                $scope.message = "Error: "+response.status + " " + response.statusText;
+            };
 
 
 
@@ -138,6 +143,7 @@ angular.module('confusionApp')
         var leaders = corporateFactory.getLeaders();
         $scope.leaders = leaders;
 
-    }])
+    }]);
 
-;
+
+})();
