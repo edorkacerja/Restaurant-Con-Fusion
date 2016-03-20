@@ -108,7 +108,7 @@
                 menuFactory.getDishes().update({id:$scope.dish.id},$scope.dish);
                 $scope.commentForm.$setPristine();
                 $scope.mycomment = {rating:5, comment:"", author:"", date:""};
-            }; 
+            };
     }])
 
     // implement the IndexController and About Controller here
