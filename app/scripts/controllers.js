@@ -141,9 +141,16 @@
                     $scope.message = "Error: "+response.status + " " + response.statusText;
             });
 
-        console.log(corporateFactory);
-        var leader = corporateFactory.getLeader(3);
-        $scope.leader = leader;
+
+        corporateFactory.getLeaders().get({id:3})
+            .$promise.then(
+                function (response) {
+                    console.log(response);
+                $scope.leader= response;
+            },
+            function (response) {
+                $scope.message = "Error: "+response.status + " " + response.statusText;
+            });
 
     }])
 
