@@ -51,5 +51,5 @@ describe('conFusion App E2E Testing', function() {
     });
 
 
-    
+
 });

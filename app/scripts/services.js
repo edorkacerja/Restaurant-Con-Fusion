@@ -16,7 +16,9 @@
         // implement a function named getPromotion
 
         this.getPromotion = function(index){
-            return promotions[index];
+
+
+            return $resource(baseURL+"promotions/:id", null, {'update':{method:'PUT'}});
         };
         // that returns a selected promotion.
 

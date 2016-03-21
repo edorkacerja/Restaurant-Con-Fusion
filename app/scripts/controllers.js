@@ -10,10 +10,12 @@
         $scope.showDetails = false;
         $scope.showMenu = false;
         $scope.message = "Loading ...";
+
         menuFactory.getDishes().query(
             function(response) {
                 $scope.dishes = response;
                 $scope.showMenu = true;
+                console.log(response);
             },
             function(response) {
                 $scope.message = "Error: "+response.status + " " + response.statusText;
@@ -64,7 +66,7 @@
 
             console.log($scope.feedback);
 
-            if ($scope.feedback.agree && ($scope.feedback.mychannel == "")) {
+            if ($scope.feedback.agree && ($scope.feedback.mychannel ==="")) {
                 $scope.invalidChannelSelection = true;
                 console.log('incorrect');
             }
@@ -116,6 +118,7 @@
     .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory){
 
         $scope.dish = {};
+        $scope.promotion = {};
         $scope.showDish = false;
         $scope.message="Loading ...";
         $scope.dish = menuFactory.getDishes().get({id:0})
@@ -129,8 +132,14 @@
                 }
             );
 
-        var promotion = menuFactory.getPromotion(0);
-        $scope.promotion = promotion;
+        menuFactory.getPromotion().get({id:0})
+            .$promise.then(
+                function(response) {
+                    $scope.promotion = response;
+                },
+                function(response) {
+                    $scope.message = "Error: "+response.status + " " + response.statusText;
+            });
 
         console.log(corporateFactory);
         var leader = corporateFactory.getLeader(3);
