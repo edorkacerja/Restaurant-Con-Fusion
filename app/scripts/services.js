@@ -25,6 +25,18 @@
 
     }])
 
+    .service('feedbackFactory', function($resource, baseURL){
+
+        this.submitReview = function(){
+
+            return $resource(baseURL+"feedback", null, {'update': {method: 'PUT'}});
+
+
+        };
+
+
+    })
+
     .factory('corporateFactory', function($resource, baseURL ) {
 
         var corpfac = {};
@@ -34,6 +46,8 @@
         corpfac.getLeaders = function(){
             return $resource(baseURL + "leadership/:id", null , {'update':{method:'PUT'}});
         };
+
+
 
 
         // Remember this is a factory not a service

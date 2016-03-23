@@ -11,15 +11,7 @@
         $scope.showMenu = false;
         $scope.message = "Loading ...";
 
-        menuFactory.getDishes().query(
-            function(response) {
-                $scope.dishes = response;
-                $scope.showMenu = true;
-                console.log(response);
-            },
-            function(response) {
-                $scope.message = "Error: "+response.status + " " + response.statusText;
-            });
+
 
 
 
@@ -60,11 +52,11 @@
 
     }])
 
-    .controller('FeedbackController', ['$scope', function($scope) {
+    .controller('FeedbackController', ['$scope', 'feedbackFactory', function($scope, feedbackFactory) {
 
+        $scope.feedbackArray = [];
         $scope.sendFeedback = function() {
 
-            console.log($scope.feedback);
 
             if ($scope.feedback.agree && ($scope.feedback.mychannel ==="")) {
                 $scope.invalidChannelSelection = true;
@@ -75,7 +67,11 @@
                 $scope.feedback = {mychannel:"", firstName:"", lastName:"", agree:false, email:"" };
                 $scope.feedback.mychannel="";
                 $scope.feedbackForm.$setPristine();
-                console.log($scope.feedback);
+
+                $scope.feedbackArray.push($scope.feedback);
+                feedbackFactory.submitReview().update({},$scope.feedback);
+
+                console.log($scope.feedbackArray);
             }
         };
     }])
@@ -160,11 +156,18 @@
 
 
 
-        console.log(corporateFactory);
-        var leader = corporateFactory.getLeader(3);
-        $scope.leader = leader;
-        var leaders = corporateFactory.getLeaders();
-        $scope.leaders = leaders;
+
+
+        corporateFactory.getLeaders().query(
+            function(response) {
+                $scope.leaders = response;
+            },
+            function(response) {
+                $scope.message = "Error: "+response.status + " " + response.statusText;
+            });
+
+
+
 
     }]);
 
