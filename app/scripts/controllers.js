@@ -63,13 +63,16 @@
                 console.log('incorrect');
             }
             else {
-                $scope.invalidChannelSelection = false;
-                $scope.feedback = {mychannel:"", firstName:"", lastName:"", agree:false, email:"" };
-                $scope.feedback.mychannel="";
-                $scope.feedbackForm.$setPristine();
+
 
                 $scope.feedbackArray.push($scope.feedback);
-                feedbackFactory.submitReview().update({},$scope.feedback);
+                feedbackFactory.submitReview().save({},$scope.feedback);
+
+                $scope.invalidChannelSelection = false;
+                $scope.feedback = {mychannel:"", firstName:"", lastName:"", agree:false, email:"" };
+                $scope.feedbackForm.$setPristine();
+
+
 
                 console.log($scope.feedbackArray);
             }

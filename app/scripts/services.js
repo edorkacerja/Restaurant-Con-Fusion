@@ -29,7 +29,7 @@
 
         this.submitReview = function(){
 
-            return $resource(baseURL+"feedback", null, {'update': {method: 'PUT'}});
+            return $resource(baseURL+"feedback", null, {'save': {method: 'POST'}});
 
 
         };
